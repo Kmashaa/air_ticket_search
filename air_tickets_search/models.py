@@ -30,6 +30,9 @@ class Flight(models.Model):
     reserved_number_of_seats = models.IntegerField()
     price = models.IntegerField()
 
+    def __str__(self):
+        return self.departure_date
+
 
 class Ticket(models.Model):
     seat = models.IntegerField()
