@@ -17,22 +17,22 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 """
-
-
-class Flight(models.Model):
+class Flights(models.Model):
     aviacompany = models.CharField(max_length=50)
     departure_city = models.CharField(max_length=50)
     arrival_city = models.CharField(max_length=50)
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
-    flight_time = models.DateTimeField()
     total_number_of_seats = models.IntegerField()
     reserved_number_of_seats = models.IntegerField()
     price = models.IntegerField()
 
     def __str__(self):
-        return self.departure_date
+        return self.aviacompany
+
+    def publish(self):
+        self.save()
 
 
-class Ticket(models.Model):
+class Tickets(models.Model):
     seat = models.IntegerField()

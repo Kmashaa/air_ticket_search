@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'air_tickets_search'
+    'air_tickets_search',
 ]
 
 MIDDLEWARE = [
