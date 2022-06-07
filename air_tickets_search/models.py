@@ -25,7 +25,8 @@ class Flights(models.Model):
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
     price = models.IntegerField()
-    
+    available = models.BooleanField(default=True)
+
 
     def __str__(self):
         return self.aviacompany
@@ -38,3 +39,13 @@ class Tickets(models.Model):
 
     def __str__(self):
         return self.seat
+
+
+class Flights_bought(models.Model):
+    id=models.IntegerField(primary_key=True)
+    aviacompany = models.CharField(max_length=50)
+    departure_city = models.CharField(max_length=50)
+    arrival_city = models.CharField(max_length=50)
+    departure_date = models.DateTimeField()
+    arrival_date = models.DateTimeField()
+    price = models.IntegerField()

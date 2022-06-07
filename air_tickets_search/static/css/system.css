@@ -1,6 +1,14 @@
 h1 a {
     color: #FCA205;
+    margin:700px;
+    font-size: 50px;
 }
-body {
-    padding-left: 15px;
+
+h2 a{
+    color: #F00205;
+    margin:1500px;
+    font-size: 20px;
+}
+h3 a{
+    margin:1500px;
 }

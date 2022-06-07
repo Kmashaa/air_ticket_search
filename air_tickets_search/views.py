@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Flights, Tickets
+from .models import Flights, Tickets, Flights_bought
 from django.utils import timezone
 from .forms import PostForm
 
@@ -14,6 +14,9 @@ def tickets_detail(request,id,departure_city):
     ticket=get_object_or_404(Tickets,id=id,departure_city=departure_city,available=True)
     return render(request,'air_tickets_search/detail.html',{'ticket':ticket})
 
+def flight_bought(request, fl):
+    flight = get_object_or_404(Flights, id=fl)
+    return render(request, 'air_tickets_search/flight_bought.html', { 'flight' : flight })
 
 def flight_list_p(request):
     flights = Flights.objects.order_by('price')
@@ -22,6 +25,10 @@ def flight_list_p(request):
 def flight_list_d(request):
     flights = Flights.objects.order_by('departure_date')
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
+
+def flight_list_bought(request):
+    flights = Flights_bought.objects.order_by('departure_date')
+    return render(request, 'air_tickets_search/flight_list_bought.html', { 'flights' : flights })
 
 def flight_new(request):
     if request.method =="POST":
@@ -56,4 +63,13 @@ def hren(request):
 
 def flight_detail(request, fl):
     flight = get_object_or_404(Flights, id=fl)
-    return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight})
+    flight_bought=Flights_bought.objects.create(id=fl,
+                                                aviacompany=flight.aviacompany,
+                                                departure_city=flight.departure_city,
+                                                arrival_city=flight.arrival_city,
+                                                departure_date=flight.departure_date,
+                                                arrival_date=flight.arrival_date,
+                                                price=flight.price
+                                                )
+    flight.delete()
+    return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})

@@ -11,18 +11,17 @@
         <div>
             <h1><a href="/">Air Tickets search system</a></h1>
         </div>
-        <h2><a href="/b"> Bought tickets</a></h2>
-        <p><a href="/d">Sort by date |</a><a href="/p"> Sort by price | </a></b></p>
+
 
 
         {% for flight in flights %}
             <div>
-                <p> Aviacompany: {{flight.aviacompany}}</p>
+               <h2> <p> Aviacompany: {{flight.aviacompany}}</p>
                 <p>Departure city: {{flight.departure_city}}</p>
                 <p>Arrival city: {{flight.arrival_city}}</p>
                 <p>Departure date: {{flight.departure_date}}</p>
-                <h4> <p> Price: {{ flight.price}}</p></h4>
-                <p><a href="{% url 'flight_detail' fl=flight.id %}">Buy</a></p>
+                 <p> Price: {{ flight.price}}</p></h2>
+
                 <p>________________________________
                 </p></b>
             </div>

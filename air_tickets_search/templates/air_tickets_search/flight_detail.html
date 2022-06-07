@@ -1,11 +1,13 @@
-
-
+{% load static %}
+            <h1><a href="/">Air Tickets search system</a></h1>
 {% block content %}
     <div class="flight">
         <p> Aviacompany: {{flight.aviacompany}}</p>
         <p>Departure city: {{flight.departure_city}}</p>
         <p>Arrival city: {{flight.arrival_city}}</p>
         <p>Departure date: {{flight.departure_date}}</p>
+        <p>Arrival date: {{flight.arrival_date}}</p>
         <p> Price: {{ flight.price}}</p>
+
     </div>
 {% endblock %}
