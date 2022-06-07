@@ -1,16 +1,9 @@
-<html>
-    <head>
-        <title>Air tickets</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Air Tickets search system</a></h1>
-        </div>
+{% extends 'air_tickets_search/base.html' %}
 
-        {% for flight in flights %}
-            <div>
-                <p>published: {{ flight}}</p
-            </div>
-        {% endfor %}
-    </body>
-</html>
+{% block content %}
+    <h1></h1>
+    <form method="FLIGHTS" class="flight-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Search</button>
+    </form>
+{% endblock %}

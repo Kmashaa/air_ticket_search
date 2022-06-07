@@ -1,6 +1,11 @@
+{% load static %}
 <html>
     <head>
         <title>Air tickets</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
     </head>
     <body>
         <div>
@@ -9,7 +14,12 @@
 
         {% for flight in flights %}
             <div>
-                <p>published: {{ flight}}</p
+                <p> Aviacompany: {{flight.aviacompany}}</p>
+                <p>Departure city: {{flight.departure_city}}</p>
+                <p>Arrival city: {{flight.arrival_city}}</p>
+                <p>Departure date: {{flight.departure_date}}</p>
+                <p> Price: {{ flight.price}}</p>
+                <p><a href="{% url 'flight_detail' fl=flight.id %}">Buy</a></p>
             </div>
         {% endfor %}
     </body>

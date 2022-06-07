@@ -18,21 +18,22 @@ class Post(models.Model):
         return self.title
 """
 class Flights(models.Model):
+    id=models.IntegerField(primary_key=True)
     aviacompany = models.CharField(max_length=50)
     departure_city = models.CharField(max_length=50)
     arrival_city = models.CharField(max_length=50)
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
-    total_number_of_seats = models.IntegerField()
-    reserved_number_of_seats = models.IntegerField()
     price = models.IntegerField()
 
     def __str__(self):
         return self.aviacompany
 
-    def publish(self):
-        self.save()
 
 
 class Tickets(models.Model):
     seat = models.IntegerField()
+    flight = models.ForeignKey(Flights,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.seat
