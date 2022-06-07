@@ -25,6 +25,7 @@ class Flights(models.Model):
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
     price = models.IntegerField()
+    
 
     def __str__(self):
         return self.aviacompany

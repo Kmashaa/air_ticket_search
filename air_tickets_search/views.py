@@ -15,8 +15,12 @@ def tickets_detail(request,id,departure_city):
     return render(request,'air_tickets_search/detail.html',{'ticket':ticket})
 
 
-def flight_list(request):
+def flight_list_p(request):
     flights = Flights.objects.order_by('price')
+    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
+
+def flight_list_d(request):
+    flights = Flights.objects.order_by('departure_date')
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
 
 def flight_new(request):

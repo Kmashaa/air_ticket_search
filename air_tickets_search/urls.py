@@ -2,8 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.flight_list, name='flight_list'),
+    path('', views.flight_list_p, name='flight_list_p'),
+    path('d', views.flight_list_d, name='flight_list_d'),
+    path('p', views.flight_list_p, name='flight_list_p'),
     path('flight/new/', views.flight_new, name='flight_new'),
-    path('hren',views.hren,name='hren'),
     path('flight/<int:fl>/', views.flight_detail, name='flight_detail'),
 ]
