@@ -25,14 +25,16 @@
 
         {% for flight in flights %}
             <div>
+                <p> Id:{{flight.id}}</p>
                 <p> Aviacompany: {{flight.aviacompany}}</p>
                 <p>Departure city: {{flight.departure_city}}</p>
                 <p>Arrival city: {{flight.arrival_city}}</p>
                 <p>Departure date: {{flight.departure_date}}</p>
+                <p>Arrival date: {{flight.arrival_date}}</p>
                 <h4> <p> Price: {{ flight.price}} Br</p></h4>
                 <p><a href="{% url 'flight_detail' fl=flight.id %}">Buy</a></p>
                 <p>________________________________
-                </p></b>
+                </p>
             </div>
         {% endfor %}
 
