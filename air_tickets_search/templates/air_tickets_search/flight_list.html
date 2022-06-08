@@ -11,7 +11,15 @@
         <div>
             <h1><a href="/">Air Tickets search system</a></h1>
         </div>
+        {% if user.is_authenticated %}
+        <h3><a href="/admin"> account</a></h3>
+        {% endif %}
         <h2><a href="/b"> Bought tickets</a></h2>
+        <form method="POST"  actions="/">{% csrf_token %}
+        {{form.as_p}}
+        <input type="Submit" name="Submit" value="Submit"/>
+        </form>
+
         <p><a href="/d">Sort by date |</a><a href="/p"> Sort by price | </a></b></p>
 
 
@@ -21,11 +29,15 @@
                 <p>Departure city: {{flight.departure_city}}</p>
                 <p>Arrival city: {{flight.arrival_city}}</p>
                 <p>Departure date: {{flight.departure_date}}</p>
-                <h4> <p> Price: {{ flight.price}}</p></h4>
+                <h4> <p> Price: {{ flight.price}} Br</p></h4>
                 <p><a href="{% url 'flight_detail' fl=flight.id %}">Buy</a></p>
                 <p>________________________________
                 </p></b>
             </div>
         {% endfor %}
+
+
+
+
     </body>
 </html>

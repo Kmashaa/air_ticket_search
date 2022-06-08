@@ -1,6 +1,5 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Flights, Tickets, Flights_bought
-from django.utils import timezone
 from .forms import PostForm
 
 def tickets_list(request,departure_city=None,arrival_city=None):
@@ -19,12 +18,27 @@ def flight_bought(request, fl):
     return render(request, 'air_tickets_search/flight_bought.html', { 'flight' : flight })
 
 def flight_list_p(request):
+    submitbutton=request.POST.get("submit")
+    departurecity=''
+    arrivalcity=''
+    form=PostForm(request.POST)
     flights = Flights.objects.order_by('price')
-    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
+    if form.is_valid():
+        departurecity=form.cleaned_data.get("departure_city")
+        arrivalcity=form.cleaned_data.get("arrival_city")
+        flights = Flights.objects.filter(departure_city=departurecity,arrival_city=arrivalcity)
+    return render(request,'air_tickets_search/flight_list.html',{'form' :form, 'departure_city': departurecity,'arrival_city':arrivalcity,'flights':flights})
+    # flights = Flights.objects.order_by('price')
+    # form = PostForm()
+    # return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
 
 def flight_list_d(request):
+    submitbutton = request.POST.get("submit")
+    departurecity = ''
+    arrivalcity = ''
+    form = PostForm(request.POST)
     flights = Flights.objects.order_by('departure_date')
-    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
+    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
 def flight_list_bought(request):
     flights = Flights_bought.objects.order_by('departure_date')
@@ -54,8 +68,8 @@ def flight_search(request):
             depart_city = request.departure_city
             arriv_city = request.arrival_city
     form = PostForm()
-    flights=Flights.objects.filter(departure_city=depart_city, arrival_city=arriv_city)
-    return render(request, 'air_tickets_search/flight_search.html', {'form': form})
+    flights = Flights.objects.filter(departure_city=depart_city)
+    return render(request, 'air_tickets_search/City_selection.html', {'form':form,'flights':flights})
 
 
 def hren(request):
