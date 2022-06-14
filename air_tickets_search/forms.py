@@ -8,3 +8,7 @@ class PostForm(forms.Form):
     """class Meta:
         model = Flights
         fields = ('departure_city','arrival_city')"""
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

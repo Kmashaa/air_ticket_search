@@ -1,6 +1,12 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Flights, Tickets, Flights_bought
 from .forms import PostForm
+#from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.http import HttpResponse
+#from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
 
 def tickets_list(request,departure_city=None,arrival_city=None):
     flights=Flights.objects.all()
@@ -28,9 +34,6 @@ def flight_list_p(request):
         arrivalcity=form.cleaned_data.get("arrival_city")
         flights = Flights.objects.filter(departure_city=departurecity,arrival_city=arrivalcity)
     return render(request,'air_tickets_search/flight_list.html',{'form' :form, 'departure_city': departurecity,'arrival_city':arrivalcity,'flights':flights})
-    # flights = Flights.objects.order_by('price')
-    # form = PostForm()
-    # return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights })
 
 def flight_list_d(request):
     submitbutton = request.POST.get("submit")
@@ -87,3 +90,34 @@ def flight_detail(request, fl):
                                                 )
     flight.delete()
     return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})
+
+
+
+"""class LoginPage(LoginView):
+    
+    template_name = 'login/sign_in.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
+
+    def form_invalid(self, form):
+        return render(self.request, 'login/sign_in_error.html')
+
+    def get_success_url(self):
+        return render(self.request, 'air_tickets_search/flight_list.html')"""
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Authenticated successfully')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = LoginForm()
+    return render(request, 'air_tickets_search/login.html', {'form': form})
