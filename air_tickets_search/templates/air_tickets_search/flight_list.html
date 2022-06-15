@@ -50,7 +50,7 @@
             margin-left:50px;
         }
         .us{
-            margin-left:75%;
+            margin-left:70%;
             margin-right:10%;
             font-size:23px;
             border:2px solid grey;
@@ -62,7 +62,7 @@
         }
         .tickets{
         background:#191970;
-        margin-left:75%;
+        margin-left:70%;
         margin-right:10%;
         text-align:center;
         font-size:23px;
@@ -88,7 +88,8 @@
         <span class="user">
         {% if request.user.is_authenticated %}
             Hello {{ request.user.first_name }},
-            <a href="logout/" style="color: #ffffff">Logout</a>
+            <a href="logout/" style="color: #ffffff">Sign out</a>
+            <p><a href="edit/" style="color: #ffffff">Edit profile</a></p>
         {% else %}
             <a href="login/" style="color: #ffffff">Sign in</a> | <a href="/register" style="color: #ffffff">  Sign up </a>
         {% endif %}
