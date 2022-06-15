@@ -7,18 +7,14 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.contrib.auth.decorators import login_required
 import logging
 
-"""def flight_bought(request, fl):
-    flight = get_object_or_404(Flights, id=fl)
-    return render(request, 'air_tickets_search/flight_bought.html', { 'flight' : flight })"""
-
-def flight_list(request):
+def flight_list(request) ->  HttpResponse:
     submitbutton=request.POST.get("submit")
     departurecity=''
     arrivalcity=''
     form=PostForm(request.POST)
     return render(request,'air_tickets_search/flight_list.html',{'form' :form})
 
-def flight_list_p(request):
+def flight_list_p(request) ->  HttpResponse:
     submitbutton=request.POST.get("submit")
     departurecity=''
     arrivalcity=''
@@ -30,7 +26,9 @@ def flight_list_p(request):
         flights = Flights.objects.filter(departure_city=departurecity,arrival_city=arrivalcity)
     return render(request,'air_tickets_search/flight_list.html',{'form' :form, 'departure_city': departurecity,'arrival_city':arrivalcity,'flights':flights})
 
-def flight_list_d(request):
+def flight_list_d(request) ->  HttpResponse:
+    logging.debug('This is a debug message')
+    logging.info('This is an info message')
     submitbutton = request.POST.get("submit")
     departurecity = ''
     arrivalcity = ''
@@ -42,7 +40,7 @@ def flight_list_d(request):
         flights = Flights.objects.filter(departure_city=departurecity, arrival_city=arrivalcity)
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
-def flight_list_bought(request):
+def flight_list_bought(request) ->  HttpResponse:
     user_id = request.user.id
     if request.user.is_superuser:
         flights = Flights_bought.objects.order_by('departure_date')
@@ -52,7 +50,7 @@ def flight_list_bought(request):
 
 
 
-def flight_search(request):
+def flight_search(request) ->  HttpResponse:
     depart_city = ""
     arriv_city = ""
     if request.method =="POST":
@@ -64,7 +62,8 @@ def flight_search(request):
     flights = Flights.objects.filter(departure_city=depart_city)
     return render(request, 'air_tickets_search/City_selection.html', {'form':form,'flights':flights})
 
-def flight_detail(request, fl):
+
+def flight_detail(request, fl) ->  HttpResponse:
     flight = get_object_or_404(Flights, id=fl)
     flight_bought=Flights_bought.objects.create(id=fl,
                                                 aviacompany=flight.aviacompany,
@@ -79,7 +78,7 @@ def flight_detail(request, fl):
     return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})
 
 
-def user_login(request):
+def user_login(request) ->  HttpResponse:
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -99,14 +98,14 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'air_tickets_search/login.html', {'form': form})
 
-def logout_view(request):
+def logout_view(request) ->  HttpResponse:
     logout(request)
     form = PostForm(request.POST)
     flights = Flights.objects.order_by('price')
     return render(request, 'air_tickets_search/logout.html', { 'flights' : flights ,'form' :form})
 
 
-def register(request):
+def register(request) ->  HttpResponse:
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():

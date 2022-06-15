@@ -1,8 +1,7 @@
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<style>
+{% extends 'air_tickets_search/base.html' %}
+{% load static %}
+    {% block content %}
+    <style>
     div{
     text-align:center;
     margin:auto;
@@ -13,27 +12,7 @@
     text-align:center;
     font-size:100px;
     }
-    .form{
-    font-size:20px;
-    margin-left:30%;
-    margin-right:30%;
-    margin-top:9%;
-    margin-bottom:15%;
-    background:white;
-    color:#191970;
-    padding-left:70px;
-    }
-     .title{
-    font-size:70px;
-    text-align:center;
-    margin-top:20px;
-    }
-</style>
-</head>
-<body>
-        <div class="title">
-        <a href="/" style="color: #000080">Air Tickets search system</a>
-    </div>
+    </style>
 <div class="form">
     <h1>Sign in</h1>
     <form action="." method="post">
@@ -41,4 +20,4 @@
         {% csrf_token %}
         <p><input type="submit" value="Sign in"></p>
     </form></div>
-</body>
+    {% endblock %}

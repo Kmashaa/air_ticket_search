@@ -1,31 +1,7 @@
-<head>
-<style>
-        body{
-            font-family: "Trebuchet MS", "Lucida Sans";
-            letter-spacing: 1px;
-            padding: 7px 20px;
-        }
-        .title{
-        font-size:70px;
-        text-align:center;
-        margin-top:20px;
-        }
-        .reg_form{
-            font-size:20px;
-            border:5px solid #191970;
-            background:white;
-            color:#191970;
-            padding-left:70px;
-            margin-right:30%;
-            margin-left:30%;
-            margin-top:100px;
-        }
-        </style>
-    </head>
-<body>
-        <div class="title">
-        <a href="/" style="color: #000080">Air Tickets search system</a>
-    </div>
+{% extends 'air_tickets_search/base.html' %}
+{% load static %}
+
+{% block content %}
         <div class="reg_form">
     <h1>Create an account</h1>
     <p>Please, sign up using the following form:</p>
@@ -36,3 +12,4 @@
     </form>
 </div>
 </body>
+    {% endblock %}

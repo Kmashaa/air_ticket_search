@@ -1,15 +1,8 @@
-<style>
-        body{
-            font-family: "Trebuchet MS", "Lucida Sans";
-            letter-spacing: 1px;
-            padding: 7px 20px;
-        }
-        .title{
-        font-size:70px;
-        text-align:center;
-        margin-top:20px;
-        }
-        h1{
+{% extends 'air_tickets_search/base.html' %}
+{% load static %}
+    {% block content %}
+    <style>
+            h1{
         font-size:40px;
         text-align:center;
         margin-top:20px;
@@ -20,11 +13,8 @@
         margin-top:20px;
         }
         </style>
-    </head>
-<body>
-<div class="title">
-        <a href="/" style="color: #000080">Air Tickets search system</a>
-    </div>
     <h1>Welcome {{ new_user.first_name }}!</h1>
     <p>Your account has been successfully created. Now you can <a href="{% url 'login' %}">log in</a>.</p>
 </body>
+
+    {% endblock %}

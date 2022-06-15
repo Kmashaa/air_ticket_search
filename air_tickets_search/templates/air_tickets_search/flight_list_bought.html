@@ -1,53 +1,14 @@
+{% extends 'air_tickets_search/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <title>Air tickets</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/system.css' %}">
-        <style>
-        body{
-            font-family: "Trebuchet MS", "Lucida Sans";
-            letter-spacing: 1px;
-            padding: 7px 20px;
-        }
-        .details {
-            margin-left:30%;
-            margin-right:30%;
-            margin-top:20px;
-            background: #E0FFFF;
-            border:5px solid grey;
-            border-left: 10px solid #00008B;
-            box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
-                -2px -2px 5px 0 rgba(0,0,0,.1),
-                 2px 2px 5px 0 rgba(0,0,0,.1),
-                -2px 2px 5px 0 rgba(0,0,0,.1);
-             padding: 7px 20px;
-            transition: 0.3s all linear;
-            border-bottom-left-radius: 2em;
-            border-bottom-right-radius: 2em;
-            border-top-left-radius: 2em;
-            border-top-right-radius: 2em;
-            font-size:20px;
-        }
-        .title{
-        font-size:70px;
-        text-align:center;
-        margin-top:20px;
-        }
-        h1{
+{% block content %}
+<style>
+    h1{
         margin-top:50px;
         margin-bottom:50px;
         text-align:center;
         font-size:40px;
         }
-        </style>
-    </head>
-    <body b>
-        <div class="title">
-            <a href="/" style="color: #000080">Air Tickets search system</a>
-        </div>
-
+</style>
                 {% if request.user.is_authenticated %}
 <h1>Bought tickets</h1>
         {% for flight in flights %}
@@ -67,3 +28,4 @@
             {% endif %}
     </body>
 </html>
+    {% endblock %}
