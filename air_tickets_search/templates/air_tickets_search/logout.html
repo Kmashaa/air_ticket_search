@@ -1,3 +1,8 @@
+
+<head>
+        <title>Air tickets</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <style>
         body{
             font-family: "Trebuchet MS", "Lucida Sans";
@@ -9,11 +14,6 @@
         text-align:center;
         margin-top:20px;
         }
-        h1{
-        font-size:40px;
-        text-align:center;
-        margin-top:20px;
-        }
         p{
         font-size:40px;
         text-align:center;
@@ -22,11 +22,10 @@
         </style>
     </head>
 <body>
-<div class="title">
+        <div class="title">
         <a href="/" style="color: #000080">Air Tickets search system</a>
     </div>
 {% block content %}
-    <h1>Welcome {{ new_user.first_name }}!</h1>
-    <p>Your account has been successfully created. Now you can <a href="{% url 'login' %}">log in</a>.</p>
+    <p>You has been successfully signed out.Now you can <a href="{% url 'login' %}">log in</a>.</p>
 {% endblock %}
-</body>
+{% load static %}

@@ -1,6 +1,7 @@
 {% load static %}
 <html>
     <head>
+        <script src="src/toastify.js"></script>
         <title>Air tickets</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -81,6 +82,7 @@
 
     </head>
     <body b>
+
         <div class="title">
             <a href="/" style="color: #000080">Air Tickets search system</a>
         </div>
@@ -121,8 +123,5 @@
                <p><a href="{% url 'flight_detail' fl=flight.id %}" ><input type="submit" value="Купить"></a></p>
             </div>
         {% endfor %}
-
-
-
     </body>
 </html>

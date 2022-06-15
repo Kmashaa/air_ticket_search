@@ -5,8 +5,9 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
+import logging
 
-def tickets_list(request,departure_city=None,arrival_city=None):
+"""def tickets_list(request,departure_city=None,arrival_city=None):
     flights=Flights.objects.all()
     tickets=Tickets.objects.filter(available=True)
     if departure_city:
@@ -15,7 +16,7 @@ def tickets_list(request,departure_city=None,arrival_city=None):
 
 def tickets_detail(request,id,departure_city):
     ticket=get_object_or_404(Tickets,id=id,departure_city=departure_city,available=True)
-    return render(request,'air_tickets_search/detail.html',{'ticket':ticket})
+    return render(request,'air_tickets_search/detail.html',{'ticket':ticket})"""
 
 def flight_bought(request, fl):
     flight = get_object_or_404(Flights, id=fl)
@@ -129,11 +130,11 @@ def user_login(request):
                     login(request, user)
                     form = PostForm(request.POST)
                     flights = Flights.objects.order_by('price')
-                    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
+                    return render(request, 'air_tickets_search/login_done.html', { 'flights' : flights ,'form' :form})
                 else:
-                    return HttpResponse('Disabled account')
+                    return render(request, 'air_tickets_search/login.html', { 'form' :form})
             else:
-                return HttpResponse('Invalid login')
+                return render(request, 'air_tickets_search/login.html', { 'form' :form})
     else:
         form = LoginForm()
     return render(request, 'air_tickets_search/login.html', {'form': form})
@@ -142,7 +143,7 @@ def logout_view(request):
     logout(request)
     form = PostForm(request.POST)
     flights = Flights.objects.order_by('price')
-    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
+    return render(request, 'air_tickets_search/logout.html', { 'flights' : flights ,'form' :form})
 
 
 
@@ -180,8 +181,11 @@ def edit(request):
                       'air_tickets_search/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
-
-
+    return render(request, 'air_tickets_search/flight_list.html')
+"""logger = logging.getLogger(__name__)
+def index(request):
+    logger.error("Test!!")
+    return HttpResponse("Hello logging world.")"""
 """@login_required
 def dashboard(request):
     return render(request, 'air_tickets_search/flight_list.html')"""
