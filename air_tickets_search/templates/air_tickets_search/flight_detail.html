@@ -1,13 +1,29 @@
-{% load static %}
-<head>
-        <title>Air tickets</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+     <head>
+          <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/system.css' %}">
 
+         <style>
+        .title{
+        font-size:70px;
+        text-align:center;
+        margin-top:20px;
+        }
+.form{
+    font-size:20px;
+    margin-left:30%;
+    margin-right:30%;
+    margin-top:9%;
+    margin-bottom:15%;
+    background:white;
+    color:#191970;
+    padding-left:70px;
+    }
+        </style>
     </head>
-            <h1><a href="/">Air Tickets search system</a></h1>
-{% block content %}
+<body>
+        <div class="title">
+        <a href="/" style="color: #000080">Air Tickets search system</a>
+    </div>
     <div class="flight">
        <h2> <p> Aviacompany: {{flight.aviacompany}}</p>
         <p>Departure city: {{flight.departure_city}}</p>
@@ -16,4 +32,4 @@
         <p>Arrival date: {{flight.arrival_date}}</p>
         <p>Price: {{ flight.price}} Br</p></h2>
     </div>
-{% endblock %}
+</body>

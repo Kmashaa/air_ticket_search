@@ -1,9 +1,5 @@
-{% extends 'air_tickets_search/base.html' %}
-
-{% block content %}
     <h1></h1>
     <form method="FLIGHTS" class="flight-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Search</button>
     </form>
-{% endblock %}
