@@ -12,4 +12,6 @@ urlpatterns = [
     path('flight/<int:fl>/', views.flight_detail, name='flight_detail'),
     #path('sign-in/', LoginPage.as_view(), name='sign-in'),
     path('login/', views.user_login, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    #path('logout-then-login/', 'django.contrib.auth.views.logout_then_login', name='logout_then_login'),
 ]

@@ -11,6 +11,14 @@
         <div>
             <h1><a href="/">Air Tickets search system</a></h1>
         </div>
+        <span class="user">
+        {% if request.user.is_authenticated %}
+            Hello {{ request.user.first_name }},
+            <a href="logout/">Logout</a>
+        {% else %}
+            <a href="login/">Log-in</a>
+        {% endif %}
+    </span>
         {% if user.is_authenticated %}
         <h3><a href="/admin"> account</a></h3>
         {% endif %}

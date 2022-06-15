@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 """
 class Post(models.Model):
@@ -49,3 +50,4 @@ class Flights_bought(models.Model):
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
     price = models.IntegerField()
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)

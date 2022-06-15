@@ -5,8 +5,9 @@ from .forms import PostForm
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 #from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 def tickets_list(request,departure_city=None,arrival_city=None):
     flights=Flights.objects.all()
@@ -44,7 +45,8 @@ def flight_list_d(request):
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
 def flight_list_bought(request):
-    flights = Flights_bought.objects.order_by('departure_date')
+    user_id = request.user.id
+    flights = Flights_bought.objects.filter(user=user_id).order_by('departure_date')
     return render(request, 'air_tickets_search/flight_list_bought.html', { 'flights' : flights })
 
 def flight_new(request):
@@ -113,7 +115,9 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    form = PostForm(request.POST)
+                    flights = Flights.objects.order_by('price')
+                    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -121,3 +125,13 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'air_tickets_search/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    form = PostForm(request.POST)
+    flights = Flights.objects.order_by('price')
+    return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
+
+@login_required
+def dashboard(request):
+    return render(request, 'air_tickets_search/flight_list.html')
