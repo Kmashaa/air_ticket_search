@@ -13,5 +13,6 @@ urlpatterns = [
     #path('sign-in/', LoginPage.as_view(), name='sign-in'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register, name='register'),
     #path('logout-then-login/', 'django.contrib.auth.views.logout_then_login', name='logout_then_login'),
 ]

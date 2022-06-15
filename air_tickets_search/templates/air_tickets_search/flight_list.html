@@ -37,6 +37,7 @@
             margin-left:30%;
             margin-right:30%;
             background:#191970;
+            color:white;
         }
         .find{
             font-size:20px;
@@ -89,7 +90,7 @@
             Hello {{ request.user.first_name }},
             <a href="logout/" style="color: #ffffff">Logout</a>
         {% else %}
-            <a href="login/" style="color: #ffffff">Log-in</a>
+            <a href="login/" style="color: #ffffff">Sign in</a> | <a href="/register" style="color: #ffffff">  Sign up </a>
         {% endif %}
         </span>
         </div>
@@ -102,10 +103,11 @@
         <input type="Submit" name="Submit" value="Submit"/>
         </form>
         </div>
-
+        {% if flights != None  %}
         <div class ="sort">
-                <p><a href="/d" style="color: #ffffff">Sort by date |</a><a href="/p" style="color: #ffffff"> Sort by price </a></b></p></z>
+                <p><a href=" {% url 'flight_list_d' %}" style="color: #ffffff">Sort by date</a> |<a href="/p" style="color: #ffffff"> Sort by price </a></p>
         </div>
+        {%endif%}
 
         {% for flight in flights %}
             <div class ="details">
@@ -118,7 +120,6 @@
                <p><a href="{% url 'flight_detail' fl=flight.id %}" ><input type="submit" value="Купить"></a></p>
             </div>
         {% endfor %}
-
 
 
 

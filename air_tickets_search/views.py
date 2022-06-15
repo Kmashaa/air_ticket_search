@@ -3,7 +3,7 @@ from .models import Flights, Tickets, Flights_bought
 from .forms import PostForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 
 def tickets_list(request,departure_city=None,arrival_city=None):
     flights=Flights.objects.all()
@@ -19,6 +19,13 @@ def tickets_detail(request,id,departure_city):
 def flight_bought(request, fl):
     flight = get_object_or_404(Flights, id=fl)
     return render(request, 'air_tickets_search/flight_bought.html', { 'flight' : flight })
+
+def flight_list(request):
+    submitbutton=request.POST.get("submit")
+    departurecity=''
+    arrivalcity=''
+    form=PostForm(request.POST)
+    return render(request,'air_tickets_search/flight_list.html',{'form' :form})
 
 def flight_list_p(request):
     submitbutton=request.POST.get("submit")
@@ -38,6 +45,10 @@ def flight_list_d(request):
     arrivalcity = ''
     form = PostForm(request.POST)
     flights = Flights.objects.order_by('departure_date')
+    if form.is_valid():
+        departurecity = form.cleaned_data.get("departure_city")
+        arrivalcity = form.cleaned_data.get("arrival_city")
+        flights = Flights.objects.filter(departure_city=departurecity, arrival_city=arrivalcity)
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
 def flight_list_bought(request):
@@ -132,6 +143,22 @@ def logout_view(request):
     flights = Flights.objects.order_by('price')
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            return render(request, 'air_tickets_search/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'air_tickets_search/register.html', {'user_form': user_form})
 """@login_required
 def dashboard(request):
     return render(request, 'air_tickets_search/flight_list.html')"""
