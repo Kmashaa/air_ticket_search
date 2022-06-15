@@ -1,10 +1,37 @@
-{% block title %}Log-in{% endblock %}
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<style>
+    div{
+    text-align:center;
+    margin:auto;
+    }
+    h1{
+    margin-top:50px;
+    margin-bottom:50px;
+    text-align:center;
+    font-size:100px;
+    }
+            .form{
+            font-size:20px;
+            margin-left:30%;
+            margin-right:30%;
+            margin-top:15%;
+            margin-bottom:15%;
+            background:white;
+            color:#191970;
+            padding-left:70px;
+
+        }
+
+</style>
 {% block content %}
+<div class="form">
     <h1>Log-in</h1>
-    <p>Please, use the following form to log-in:</p>
     <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Log-in"></p>
-    </form>
+    </form></div>
 {% endblock %}

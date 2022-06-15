@@ -5,26 +5,65 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/system.css' %}">
-
+        <style>
+        body{
+            font-family: "Trebuchet MS", "Lucida Sans";
+            letter-spacing: 1px;
+            padding: 7px 20px;
+        }
+        .details {
+            margin-left:30%;
+            margin-right:30%;
+            margin-top:20px;
+            background: #E0FFFF;
+            border:5px solid grey;
+            border-left: 10px solid #00008B;
+            box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+                -2px -2px 5px 0 rgba(0,0,0,.1),
+                 2px 2px 5px 0 rgba(0,0,0,.1),
+                -2px 2px 5px 0 rgba(0,0,0,.1);
+             padding: 7px 20px;
+            transition: 0.3s all linear;
+            border-bottom-left-radius: 2em;
+            border-bottom-right-radius: 2em;
+            border-top-left-radius: 2em;
+            border-top-right-radius: 2em;
+            font-size:20px;
+        }
+        .title{
+        font-size:70px;
+        text-align:center;
+        margin-top:20px;
+        }
+        h1{
+        margin-top:50px;
+        margin-bottom:50px;
+        text-align:center;
+        font-size:40px;
+        }
+        </style>
     </head>
     <body b>
-        <div>
-            <h1><a href="/">Air Tickets search system</a></h1>
+        <div class="title">
+            <a href="/" style="color: #000080">Air Tickets search system</a>
         </div>
 
-
+                {% if request.user.is_authenticated %}
 <h1>Bought tickets</h1>
         {% for flight in flights %}
-            <div>
+            <div class="details">
                <h2> <p> Aviacompany: {{flight.aviacompany}}</p>
                 <p>Departure city: {{flight.departure_city}}</p>
                 <p>Arrival city: {{flight.arrival_city}}</p>
                 <p>Departure date: {{flight.departure_date}}</p>
-                 <p> Price: {{ flight.price}}</p></h2>
-
-                <p>________________________________
+                <p> Price: {{ flight.price}}</p>
+                {% if request.user.is_superuser%}
+                    <p> User: {{flight.user}}</p></h2>
+                {% endif %}
                 </p></b>
             </div>
+
         {% endfor %}
+            {% endif %}
     </body>
 </html>

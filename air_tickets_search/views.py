@@ -1,13 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Flights, Tickets, Flights_bought
 from .forms import PostForm
-#from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
 from django.http import HttpResponse
-#from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
-from django.contrib.auth.decorators import login_required
 
 def tickets_list(request,departure_city=None,arrival_city=None):
     flights=Flights.objects.all()
@@ -46,7 +42,10 @@ def flight_list_d(request):
 
 def flight_list_bought(request):
     user_id = request.user.id
-    flights = Flights_bought.objects.filter(user=user_id).order_by('departure_date')
+    if request.user.is_superuser:
+        flights = Flights_bought.objects.order_by('departure_date')
+    else:
+        flights = Flights_bought.objects.filter(user=user_id).order_by('departure_date')
     return render(request, 'air_tickets_search/flight_list_bought.html', { 'flights' : flights })
 
 def flight_new(request):
@@ -88,7 +87,8 @@ def flight_detail(request, fl):
                                                 arrival_city=flight.arrival_city,
                                                 departure_date=flight.departure_date,
                                                 arrival_date=flight.arrival_date,
-                                                price=flight.price
+                                                price=flight.price,
+                                                user_id=request.user.id
                                                 )
     flight.delete()
     return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})
@@ -132,6 +132,6 @@ def logout_view(request):
     flights = Flights.objects.order_by('price')
     return render(request, 'air_tickets_search/flight_list.html', { 'flights' : flights ,'form' :form})
 
-@login_required
+"""@login_required
 def dashboard(request):
-    return render(request, 'air_tickets_search/flight_list.html')
+    return render(request, 'air_tickets_search/flight_list.html')"""
