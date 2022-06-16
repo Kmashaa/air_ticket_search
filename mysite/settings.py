@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@%7@%$p4c80cujf3x1*2b07wpz9n)+7^*n_&&de_&kr(apx_)k
 DEBUG = False
 
 #ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'airticketssearch.herokuapp.com/']
 
 
 # Application definition
