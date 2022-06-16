@@ -15,10 +15,6 @@ class Flights(models.Model):
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='flights_liked', blank=True)
 
 
-    def __str__(self):
-        return self.id
-
-
 
 class Tickets(models.Model):
     seat = models.IntegerField()
