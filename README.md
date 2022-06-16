@@ -1,4 +1,4 @@
-https://airticketssearch.herokuapp.com/
+https://airticketssearch.herokuapp.com/ /n
 **Air Tickets search is a Python web-site to searching and boocking air tickets** 
 
 Страница, на которой оказывается неавторизованный пользователь
