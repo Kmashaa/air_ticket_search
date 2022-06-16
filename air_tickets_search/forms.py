@@ -3,13 +3,13 @@ from django import forms
 from .models import Flights
 from django.contrib.auth.models import User
 from .models import Profile
+from django.contrib.auth import get_user_model
+
 
 class PostForm(forms.Form):
     departure_city=forms.CharField()
     arrival_city=forms.CharField()
-    """class Meta:
-        model = Flights
-        fields = ('departure_city','arrival_city')"""
+
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -38,3 +38,14 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth', 'photo')
+
+# blog/forms.py
+
+
+User = get_user_model()
+
+
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = Flights
+        fields = ['users_like']

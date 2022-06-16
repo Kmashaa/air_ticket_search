@@ -1,8 +1,16 @@
 {% extends 'air_tickets_search/base.html' %}
 {% load static %}
     {% block content %}
+<style>
+        .text_auth{
+        text-align:center;
+        font-size:30px;
+        }
+</style>
     <div class="details">
+        {% if request.user.is_authenticated %}
         <h2>Successfully bought!</h2>
+        {% endif %}
        <h2> <p> Aviacompany: {{flight.aviacompany}}</p>
         <p>Departure city: {{flight.departure_city}}</p>
         <p>Arrival city: {{flight.arrival_city}}</p>
@@ -10,5 +18,12 @@
         <p>Arrival date: {{flight.arrival_date}}</p>
         <p>Price: {{ flight.price}} Br</p></h2>
     </div>
+    {% if not request.user.is_authenticated%}
+    <script>
+        {
+        alert('You may authorize to buy this ticket!');
+        };
+    </script>
+    {% endif %}
 </body>
-    {% endblock %}
+{% endblock %}

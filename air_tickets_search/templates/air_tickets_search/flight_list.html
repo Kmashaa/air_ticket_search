@@ -37,6 +37,7 @@
                 <p>Arrival date: {{flight.arrival_date}}</p>
                 <h4> <p> Price: {{ flight.price}} Br</p></h4>
                <p><a href="{% url 'flight_detail' fl=flight.id %}" ><input type="submit" value="Купить"></a></p>
+
             </div>
         {% endfor %}
     {% endblock %}

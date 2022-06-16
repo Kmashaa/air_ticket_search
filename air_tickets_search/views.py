@@ -27,8 +27,8 @@ def flight_list_p(request) ->  HttpResponse:
     return render(request,'air_tickets_search/flight_list.html',{'form' :form, 'departure_city': departurecity,'arrival_city':arrivalcity,'flights':flights})
 
 def flight_list_d(request) ->  HttpResponse:
-    logging.debug('This is a debug message')
-    logging.info('This is an info message')
+    #logging.debug('This is a debug message')
+    #logging.info('This is an info message')
     submitbutton = request.POST.get("submit")
     departurecity = ''
     arrivalcity = ''
@@ -65,7 +65,8 @@ def flight_search(request) ->  HttpResponse:
 
 def flight_detail(request, fl) ->  HttpResponse:
     flight = get_object_or_404(Flights, id=fl)
-    flight_bought=Flights_bought.objects.create(id=fl,
+    if request.user.is_authenticated:
+        flight_bought=Flights_bought.objects.create(id=fl,
                                                 aviacompany=flight.aviacompany,
                                                 departure_city=flight.departure_city,
                                                 arrival_city=flight.arrival_city,
@@ -74,9 +75,10 @@ def flight_detail(request, fl) ->  HttpResponse:
                                                 price=flight.price,
                                                 user_id=request.user.id
                                                 )
-    flight.delete()
-    return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})
-
+        flight.delete()
+        return render(request, 'air_tickets_search/flight_detail.html', {'flight': flight_bought})
+    else:
+        return render(request,'air_tickets_search/flight_detail.html', {'flight': flight})
 
 def user_login(request) ->  HttpResponse:
     if request.method == 'POST':
