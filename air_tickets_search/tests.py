@@ -3,18 +3,20 @@ from .models import Flights
 import datetime
 
 
-
 class AuthorModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        cls.flight = Flights.objects.create(id=0,
-                                            aviacompany="MyCompany",
-                                            departure_city="MyCity",
-                                            arrival_city="OtherCity",
-                                            departure_date=datetime.datetime(2001, 1, 1, 1, 1, 1),
-                                            arrival_date=datetime.datetime(2002, 2, 2, 2, 2, 2),
-                                            price=500)
+        cls.flight = Flights.objects.create(
+            id=0,
+            aviacompany="MyCompany",
+            departure_city="MyCity",
+            arrival_city="OtherCity",
+            departure_date=datetime.datetime(2001, 1, 1, 1, 1, 1),
+            arrival_date=datetime.datetime(2002, 2, 2, 2, 2, 2),
+            price=500,
+        )
+
     def test_it_has_information_fields(self):
         self.assertIsInstance(self.flight.aviacompany, str)
         self.assertIsInstance(self.flight.departure_city, str)
