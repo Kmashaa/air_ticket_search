@@ -1,14 +1,4 @@
-{% load static %}
-<html>
-    <head>
-        <title>Air tickets</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/system.css' %}">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <!--style>
-
-        body{
+body{
             font-family: "Trebuchet MS", "Lucida Sans";
             letter-spacing: 1px;
             padding: 7px 20px;
@@ -102,13 +92,3 @@
             margin-left:30%;
             margin-top:100px;
         }
-        </style-->
-    </head>
-    <body b>
-
-        <div class="title">
-            <a href="/" style="color: #000080">Air Tickets search system</a>
-        </div>
-    {% block content %}
-    {% endblock %}
-    </body>

@@ -9,8 +9,9 @@
         font-size:40px;
         }
 </style>
-                {% if request.user.is_authenticated %}
 <h1>Bought tickets</h1>
+                {% if request.user.is_authenticated %}
+
         {% for flight in flights %}
             <div class="details">
                <h2> <p> Aviacompany: {{flight.aviacompany}}</p>
